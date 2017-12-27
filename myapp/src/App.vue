@@ -26,11 +26,30 @@
             </div>
             <!-- 右侧列表 -->
             <div class="main-right">
-                <el-menu default-active="/activePublic" class="el-menu-vertical-demo" :router="true">
+                <!-- <el-menu default-active="/activePublic" class="el-menu-vertical-demo" :router="true">
                     <el-menu-item index="/activePublic" :class="{'isActive': active}">全站搜索</el-menu-item>
                     <el-menu-item index="/activeManage" :class="{'isActive': !active}">点击排行</el-menu-item>
                     <el-menu-item index="/activeManage" :class="{'isActive': !active}">最新文章</el-menu-item>
-                </el-menu>
+                </el-menu> -->
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>全站搜索</span>
+                        <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                    </div>
+                    <div>
+                        <el-input v-model="input" placeholder="请输入内容" class="ipt1"></el-input>
+                        <el-button type="primary" class="ipt2">搜索</el-button>
+                    </div>
+                </el-card>
+                
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>点击排行</span>
+                    </div>
+                    <div v-for="val in tableData" class="text item">
+                        {{'列表内容 ' + val }}
+                    </div>
+                </el-card>
             </div>
         </main>
     </div>
@@ -117,18 +136,48 @@ main {
     border: solid 40px #e9ecf1;
     background-color: #fcfcfc;
 }
-main .main-right {
-    text-align: center;
-    width: 200px;
-    float: left;
-}
 main .main-left {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
     background-color: tan;
-    padding: 50px 70px;
+    padding: 50px 15px;
 }
+main .main-right {
+    text-align: center;
+    width: 400px;
+    float: left;
+}
+main .main-right .ipt1{
+    width:150px;
+    float: left;
+    margin-bottom: 15px;
+}
+main .main-right .ipt2{
+    float: right;
+    margin-right: 20px;
+}
+.text {
+    font-size: 14px;
+}
+
+.item {
+margin-bottom: 18px;
+}
+.clearfix{
+    background:rgb(16, 233, 233);
+    padding: 2px 5px;
+    border-radius:5px;
+}
+.clearfix:before,
+.clearfix:after {
+display: table;
+content: "";
+}
+.clearfix:after {
+clear: both
+}
+
 main .el-menu {
     background-color: transparent !important;
 }
