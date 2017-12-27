@@ -61,7 +61,6 @@
     import "element-ui/lib/theme-default/index.css";
 
     Vue.use(Element);
-
     export default {
         name: "app",
         data: function() {
