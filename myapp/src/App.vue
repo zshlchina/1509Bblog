@@ -12,7 +12,7 @@
                 </el-col>
             </el-row>
         </header>
-        <div style="position: relative;height: 60px;width: 100%;"></div>
+        <div style="position: relative;height: 60px;width: 100%;margin-left:60px;line-height:60px;">主页</div>
 
         <main>
             <!-- 左侧列表 -->
@@ -23,18 +23,20 @@
                     <el-table-column prop="name" label="作者" width="232"></el-table-column>
                     <el-table-column prop="date" label="发布时间" width="232"></el-table-column>
                 </el-table>
+
+                <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :total="1000" class="pages">
+                </el-pagination>
+
+                
             </div>
             <!-- 右侧列表 -->
             <div class="main-right">
-                <!-- <el-menu default-active="/activePublic" class="el-menu-vertical-demo" :router="true">
-                    <el-menu-item index="/activePublic" :class="{'isActive': active}">全站搜索</el-menu-item>
-                    <el-menu-item index="/activeManage" :class="{'isActive': !active}">点击排行</el-menu-item>
-                    <el-menu-item index="/activeManage" :class="{'isActive': !active}">最新文章</el-menu-item>
-                </el-menu> -->
                 <el-card class="box-card">
                     <div slot="header" class="clearfix">
                         <span>全站搜索</span>
-                        <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
                     </div>
                     <div>
                         <el-input v-model="input" placeholder="请输入内容" class="ipt1"></el-input>
@@ -46,8 +48,21 @@
                     <div slot="header" class="clearfix">
                         <span>点击排行</span>
                     </div>
-                    <div v-for="val in tableData" class="text item">
-                        {{'列表内容 ' + val }}
+                    <div v-for="(val,key) in tableData" :key="val" class="text item lists">
+                        <i>{{key+1}}</i>
+                        <span>{{val.title}}</span>
+                        <span class="el-icon-star-on"></span>
+                        <span>{{val.count}}</span>
+                    </div>
+                </el-card>
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>最新文章</span>
+                    </div>
+                    <div v-for="(val,key) in tableData" :key="val" class="text item listss">
+                        <i>{{key+1}}</i>
+                        <span>{{val.title}}</span>
+                        <span>{{val.date}}</span>
                     </div>
                 </el-card>
             </div>
@@ -67,25 +82,29 @@
             return {
                 active: true,
                 tableData: [{
-                        title:'第一条',
-                        type:'八维',
+                        title: '第一条',
+                        type: '八维',
                         name: '张三',
-                        date: '2017-10-01'
+                        date: '2017-10-01',
+                        count:10
                     }, {
                         title:'第二条',
                         type:'技术',
                         name: '李四',
-                        date: '2017-10-02'
+                        date: '2017-10-02',
+                        count: 8
                     }, {
                         title:'第三条',
                         type:'八维',
                         name: '赵武',
-                        date: '2017-10-03'
+                        date: '2017-10-03',
+                        count: 5
                     }, {
                         title:'第四条',
                         type:'技术',
                         name: '王柳',
-                        date: '2017-10-04'
+                        date: '2017-10-04',
+                        count: 1
                     }]
             };
         }
@@ -142,6 +161,10 @@ main .main-left {
     background-color: tan;
     padding: 50px 15px;
 }
+main .main-left .pages{
+    text-align: center;
+    margin-top: 50px;
+}
 main .main-right {
     text-align: center;
     width: 400px;
@@ -155,6 +178,35 @@ main .main-right .ipt1{
 main .main-right .ipt2{
     float: right;
     margin-right: 20px;
+}
+main .main-right .lists{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+main .main-right .lists span{
+    flex:1;
+    text-align: center;
+}
+main .main-right .lists i:first-child{
+    background: blue;
+    padding: 2px 5px;
+    color:#fff;
+}
+main .main-right .listss{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+main .main-right .listss span{
+    flex:1;
+    text-align: center;
+}
+main .main-right .listss i:first-child{
+    background: blue;
+    border-radius: 50%;
+    padding: 2px 5px;
+    color:#fff;
 }
 .text {
     font-size: 14px;
