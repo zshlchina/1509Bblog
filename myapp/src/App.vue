@@ -1,112 +1,135 @@
 <template>
-      <div id="app">
-        <!-- 头部导航 -->
+    <div id="app">
+    <!-- 头部导航 -->
         <header class="header">
-        <el-row>
-            <el-col :span="24">
-              <el-menu default-active="5" class="el-menu-demo" mode="horizontal" @select="">
-                <!-- <h2 class="h2">个人博客</h2> -->
-                <el-menu-item index="1" class="h2">个人博客</el-menu-item>
-                <el-menu-item index="2">技术</el-menu-item>
-                <el-menu-item index="3">八维</el-menu-item>
-              </el-menu>
-            </el-col>
-        </el-row>
+            <el-row>
+                <el-col :span="24">
+                    <el-menu default-active="5" class="el-menu-demo" mode="horizontal" @select="">
+                        <el-menu-item index="1" class="h2">个人博客</el-menu-item>
+                        <el-menu-item index="2">技术</el-menu-item>
+                        <el-menu-item index="3">八维</el-menu-item>
+                    </el-menu>
+                </el-col>
+            </el-row>
         </header>
         <div style="position: relative;height: 60px;width: 100%;"></div>
 
         <main>
-              <!-- 左侧列表 -->
-              <div  class="main-left" >
-
-              </div>
-            
-
-              <!-- 右侧列表 -->
-              <div class="main-right">
-              <el-menu default-active="/activePublic" class="el-menu-vertical-demo" :router="true">
-                <el-menu-item index="/activePublic" :class="{'isActive': active}">全站搜索</el-menu-item>
-                <el-menu-item index="/activeManage" :class="{'isActive': !active}">点击排行</el-menu-item>
-                <el-menu-item index="/activeManage" :class="{'isActive': !active}">最新文章</el-menu-item>
-              </el-menu>
+            <!-- 左侧列表 -->
+            <div  class="main-left" >
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column prop="title" label="标题" width="232"></el-table-column>
+                    <el-table-column prop="type" label="分类" width="232"></el-table-column>
+                    <el-table-column prop="name" label="作者" width="232"></el-table-column>
+                    <el-table-column prop="date" label="发布时间" width="232"></el-table-column>
+                </el-table>
+            </div>
+            <!-- 右侧列表 -->
+            <div class="main-right">
+                <el-menu default-active="/activePublic" class="el-menu-vertical-demo" :router="true">
+                    <el-menu-item index="/activePublic" :class="{'isActive': active}">全站搜索</el-menu-item>
+                    <el-menu-item index="/activeManage" :class="{'isActive': !active}">点击排行</el-menu-item>
+                    <el-menu-item index="/activeManage" :class="{'isActive': !active}">最新文章</el-menu-item>
+                </el-menu>
             </div>
         </main>
-      </div>
-    </template>
+    </div>
+</template>
 
-    <script>
-import Vue from "vue";
-import Element from "element-ui";
-import "element-ui/lib/theme-default/index.css";
+<script>
+    import Vue from "vue";
+    import Element from "element-ui";
+    import "element-ui/lib/theme-default/index.css";
 
-Vue.use(Element);
+    Vue.use(Element);
 
-export default {
-  name: "app",
-  data: function() {
-    return {
-      active: true
+    export default {
+        name: "app",
+        data: function() {
+            return {
+                active: true,
+                tableData: [{
+                        title:'第一条',
+                        type:'八维',
+                        name: '张三',
+                        date: '2017-10-01'
+                    }, {
+                        title:'第二条',
+                        type:'技术',
+                        name: '李四',
+                        date: '2017-10-02'
+                    }, {
+                        title:'第三条',
+                        type:'八维',
+                        name: '赵武',
+                        date: '2017-10-03'
+                    }, {
+                        title:'第四条',
+                        type:'技术',
+                        name: '王柳',
+                        date: '2017-10-04'
+                    }]
+            };
+        }
     };
-  }
-};
 </script>
 
-    <style>
+<style>
 body {
-  margin: 0;
+    margin: 0;
 }
 #app {
-  min-width: 1200px;
-  margin: 0 auto;
-  font-family: "Helvetica Neue", "PingFang SC", Arial, sans-serif;
+    min-width: 1200px;
+    margin: 0 auto;
+    font-family: "Helvetica Neue", "PingFang SC", Arial, sans-serif;
 }
 /* 头部导航 */
 header {
-  z-index: 1000;
-  min-width: 1200px;
-  transition: all 0.5s ease;
-  background: skyblue;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+    z-index: 1000;
+    min-width: 1200px;
+    transition: all 0.5s ease;
+    background: skyblue;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
 }
 header.header-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 header .el-menu-demo {
-  padding-left: 100px !important;
+    padding-left: 100px !important;
 }
 header .el-menu{
-  background:skyblue;
+    background:skyblue;
 }
 header .h2{
-  font-size: 30px;
-  color:#333;
+    font-size: 30px;
+    color:#333;
 }
 
 /* 主内容区 */
 main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 800px;
-  border: solid 40px #e9ecf1;
-  background-color: #fcfcfc;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 800px;
+    border: solid 40px #e9ecf1;
+    background-color: #fcfcfc;
 }
 main .main-right {
-  text-align: center;
-  width: 200px;
-  float: left;
+    text-align: center;
+    width: 200px;
+    float: left;
 }
 main .main-left {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  background-color: tan;
-  padding: 50px 70px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background-color: tan;
+    padding: 50px 70px;
 }
 main .el-menu {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 </style>
